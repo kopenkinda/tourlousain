@@ -1,0 +1,7 @@
+@import 'styles/mixins/centered-text.mixin.scss';
+
+.h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  @include centered-text;
+}
