@@ -39,9 +39,20 @@
 
 <body>
   <div class="box">
-    <h1>Hello 🌟</h1>
-    <a href="/api/">Go to API</a>
-    <a href="/register/">Sign in</a>
+    <h1>Bienvenue 🌟</h1>
+    <a href="/">Menu principal</a>
+    <form action="/login" method="POST">
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+      </div>
+      <div>
+        <label for="pwd">Password</label>
+        <input type="password" id="pwd" name="pwd">
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <a href="/register">Sign in</a>
   </div>
 </body>
 

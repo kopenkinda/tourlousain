@@ -19,7 +19,7 @@ export function getOrmConfig() {
     host: DB_HOST || 'localhost',
     port: DB_PORT ? +DB_PORT : 3306,
     username: DB_USER || 'root',
-    password: DB_PASSWORD || 'toor',
+    password: DB_PASSWORD || '',
     database: DB_NAME || 'tourlousain',
     entities: [
       entityPath,
