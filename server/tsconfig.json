@@ -13,7 +13,10 @@
     "types": [
       "node",
       "@types/jest"
-    ]
+    ],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false
   },
   "include": [
     "src"

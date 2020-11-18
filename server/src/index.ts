@@ -1,11 +1,24 @@
+import 'reflect-metadata';
 import dotenv from 'dotenv';
 
-import { app } from './server';
+import { dbInit } from './database';
+import { serverInit } from './server';
+import { logger } from './utils/logger';
 
 dotenv.config();
 
-const PORT = process.env.SERVER_PORT || 1337;
+(async () => {
+  try {
+    const dbConnection = await dbInit();
+    logger.info('Connection to the database is established');
+    const app = serverInit();
+    const PORT = process.env.SERVER_PORT || 1337;
 
-app.listen(PORT, () => {
-  console.info(`App running on http://localhost:${PORT}/`);
-});
+    app.listen(PORT, () => {
+      logger.info(`App running on http://localhost:${PORT}/`);
+    });
+  } catch (e) {
+    logger.error(e);
+    process.exit();
+  }
+})();
