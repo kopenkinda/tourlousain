@@ -27,12 +27,14 @@ const colors = {
 // eslint-disable-next-line no-console
 const logOfType = (tag: string, color: string) => (...data: any) => console.log(`${new Date().toLocaleTimeString()} ${color}[${tag}]${colors.Reset}`, ...data);
 
-const info = logOfType('info', colors.FgWhite + colors.BgCyan);
-const warn = logOfType('warn', colors.FgWhite + colors.BgYellow);
+const alert = logOfType('!', colors.FgBlack + colors.Blink + colors.BgYellow);
+const info = logOfType('info', colors.FgBlack + colors.BgCyan);
+const warn = logOfType('warn', colors.FgBlack + colors.BgYellow);
 const log = logOfType('log', colors.FgWhite + colors.BgGreen);
 const error = logOfType('danger', colors.FgWhite + colors.BgRed);
 
 export const logger = {
+  alert,
   info,
   warn,
   log,

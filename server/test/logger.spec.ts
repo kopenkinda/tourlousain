@@ -6,6 +6,7 @@ describe('Logger tests', () => {
     logger.warn('This is an example of a logger.warn() method');
     logger.error('This is an example of a logger.error() method');
     logger.info('This is an example of a logger.info() method');
+    logger.alert('This is an example of a logger.alert() method');
 
     expect(1).toBe(1);
   });
