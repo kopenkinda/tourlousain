@@ -5,10 +5,9 @@ import { dbInit } from './database';
 import { serverInit } from './server';
 import { logger } from './utils/logger';
 
-dotenv.config();
-
 (async () => {
   try {
+    dotenv.config();
     const dbConnection = await dbInit();
     logger.info('Connection to the database is established');
     const app = serverInit();
@@ -22,3 +21,4 @@ dotenv.config();
     process.exit();
   }
 })();
+
