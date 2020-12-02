@@ -24,7 +24,7 @@ const colors = {
   BgWhite: '\x1b[47m',
 };
 
-const logOfType = (tag: string, color: string, emoji: string) => (data: any) => console.log(`${new Date().toLocaleTimeString()} ${color} ${emoji || '  '}  [${tag}]${colors.Reset}`, data);
+const logOfType = (tag: string, color: string, emoji: string) => (...data: any) => console.log(`${new Date().toLocaleTimeString()} ${color} ${emoji || '  '}  [${tag}]${colors.Reset}`, ...data);
 
 const info = logOfType('INFO', colors.FgCyan, 'ℹ');
 const warn = logOfType('WARN', colors.FgYellow, '⚠');

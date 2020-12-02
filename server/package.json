@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "dependencies": {
     "@types/express-session": "^1.17.2",
+    "@types/mongoose": "^5.10.1",
+    "@types/mongoose-unique-validator": "^1.0.4",
     "@types/passport": "^1.0.4",
+    "@types/passport-google-oauth20": "^2.0.4",
     "@types/passport-local": "^1.0.33",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
@@ -14,8 +17,11 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "mongodb": "^3.6.3",
+    "mongoose": "^5.11.1",
+    "mongoose-unique-validator": "^2.0.3",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {

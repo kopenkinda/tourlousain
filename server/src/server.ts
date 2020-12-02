@@ -7,10 +7,7 @@ import { exampleMiddleware } from './middlewares/example.middleware';
 import { apiRouter } from './routes/api.router';
 import { authRouter } from './routes/auth.router';
 
-// permet de charger toutes nos variables d'environnement et de les mettre dans process.env
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+require('./configs/passport-config');
 
 export function serverInit() {
   const app = express();
@@ -27,7 +24,7 @@ export function serverInit() {
 
   // voir .env et modifier la variable en une string de caractères aléatoires par sécurité
   app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
   }));
