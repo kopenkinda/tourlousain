@@ -8,7 +8,7 @@ import { logger } from './utils/logger';
 (async () => {
   try {
     dotenv.config();
-    const dbConnection = await dbInit();
+    await dbInit();
     logger.info('Connection to the database is established');
     const app = serverInit();
     const PORT = process.env.SERVER_PORT || 1337;
@@ -21,4 +21,3 @@ import { logger } from './utils/logger';
     process.exit();
   }
 })();
-
