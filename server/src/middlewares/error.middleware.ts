@@ -10,6 +10,7 @@ export const notFoundHandler = (req: Request, res: Response, next: NextFunction)
 
 export const errorHandler = (err: HTTPError, req: Request, res: Response, next: NextFunction) => {
   const error = {
+    error: true,
     code: err.code || 500,
     message: err.message || 'Internal Server Error',
     stack: process.env.NODE_ENV !== 'production' ? err.stack : '',
