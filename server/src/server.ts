@@ -6,8 +6,7 @@ import passport from 'passport';
 import { exampleMiddleware } from './middlewares/example.middleware';
 import { apiRouter } from './routes/api.router';
 import { authRouter } from './routes/auth.router';
-
-require('./configs/passport-config');
+import { initializePassport } from './configs/passport.config';
 
 export function serverInit() {
   const app = express();
@@ -23,11 +22,10 @@ export function serverInit() {
   app.use(flash());
 
   // voir .env et modifier la variable en une string de caractères aléatoires par sécurité
-  app.use(session({
-    secret: process.env.SESSION_SECRET!,
-    resave: false,
-    saveUninitialized: false,
-  }));
+  app.use(
+    session({ secret: process.env.SESSION_SECRET!, resave: false, saveUninitialized: false }),
+  );
+  initializePassport();
   app.use(passport.initialize());
   app.use(passport.session());
 
