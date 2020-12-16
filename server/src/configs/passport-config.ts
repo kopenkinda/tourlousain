@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { logger } from '../utils/logger';
 import { User } from '../models/user.entity';
 
 passport.serializeUser((user: any, done: any) => {
@@ -12,11 +13,11 @@ passport.deserializeUser((id: any, profile: any, done: any) => {
   // pour vérifier si l'utilisateur est dans la bdd
   User.findOne(id)
   .then((user) => {
+    logger.info('A', user);
     done(user);
   });
 });
 
-// modifier callbackURL à l'avenir
 passport.use(new GoogleStrategy({
     clientID: '700601288506-q47f060f8q98m7jraslg40qv0ggv7v59.apps.googleusercontent.com',
     clientSecret: 'GWVm-SBdUny79dV9STni8fzy',
@@ -32,8 +33,9 @@ passport.use(new GoogleStrategy({
     .then(async (user) => {
       let newUser = user;
       if (!user) {
-        newUser = User.create(userToFind);
+        newUser = await User.create(userToFind);
       }
-      cb(newUser);
+      logger.info('B', user, userToFind);
+      cb(' ', newUser);
     });
   }));
