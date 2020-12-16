@@ -1,13 +1,11 @@
 import { ConnectionOptions, DatabaseType } from 'typeorm';
 import path from 'path';
-import { logger } from 'src/utils/logger';
 
 export function getOrmConfig() {
   const entityPaths = [
     path.join(__dirname, '..', 'models', '**/*.entity.js'),
     path.join(__dirname, '..', 'models', '**/*.entity.ts'),
   ];
-  logger.info('Entities (aka. Models) are stored in', entityPaths);
   const {
     DB_TYPE,
     DB_PORT,
