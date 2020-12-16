@@ -8,8 +8,6 @@ authRouter.get('/', index);
 
 authRouter.get('/logout', logout);
 
-authRouter.get('/google', passport.authenticate('google', {
-  scope: ['profile', 'email'],
-}));
+authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 authRouter.get('/google/redirect', passport.authenticate('google'), googleRedirect);
