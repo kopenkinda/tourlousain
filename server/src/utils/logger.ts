@@ -1,3 +1,6 @@
+import stack from 'callsite';
+import { sep } from 'path';
+
 const colors = {
   Reset: '\x1b[0m',
   Bright: '\x1b[1m',
@@ -27,23 +30,23 @@ const colors = {
 function getFileName() {
   const stackOffset = 2;
   try {
-    throw new Error('Custom Error');
-  } catch (e) {
-    Error.prepareStackTrace = (...args) => args[1];
-    const file = e.stack[stackOffset].getFileName();
-    const row = e.stack[stackOffset].getLineNumber();
-    const column = e.stack[stackOffset].getColumnNumber();
-    return { file, row, column };
+    throw new Error();
+  } catch {
+    const cs = stack();
+    return {
+      file: cs[stackOffset].getFileName().split(sep).slice(-2).join(sep),
+      row: cs[stackOffset].getLineNumber(),
+      column: cs[stackOffset].getColumnNumber(),
+    };
   }
 }
 
 const logOfType = (tag: string, color: string) => (...data: any) => {
   const { file, row, column } = getFileName();
-  const filePath = file.split('/').slice(-2).join('/');
   // eslint-disable-next-line no-console
   console.log(
-    `╭${color}[${tag}]${colors.Reset} (${filePath}@${row}:${column}) ${new Date().toLocaleTimeString()}
-╰#`, ...data,
+    `╭${color}[${tag}]${colors.Reset} (${file}@${row}:${column}) ${new Date().toLocaleTimeString()}
+╰#`, ...data, '\n',
   );
 };
 

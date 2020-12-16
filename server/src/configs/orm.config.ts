@@ -6,6 +6,7 @@ export function getOrmConfig() {
     path.join(__dirname, '..', 'models', '**/*.entity.js'),
     path.join(__dirname, '..', 'models', '**/*.entity.ts'),
   ];
+
   const {
     DB_TYPE,
     DB_PORT,

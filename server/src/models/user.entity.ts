@@ -5,7 +5,10 @@ import {
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  _id: number;
+  id: number;
+
+  @Column()
+  googleID: string;
 
   @Column()
   email: string;
