@@ -6,3 +6,4 @@ export async function index(req: Request, res: Response): Promise<Response<any>>
     data: '🌟',
   });
 }
+
