@@ -10,21 +10,24 @@ export function passportInit() {
     getGoogleOAuthConfig(),
     async (accessToken, refreshToken, profile, done) => {
       const user = await User.find({ googleID: profile.id });
-      if (user != null) {
+      if (user.length > 0) {
         // ? User found
-        logger.log({ user });
-        done('', user);
+        done('', user[0]);
       } else {
         // ?  Creating user
         const newUser = new User();
         const { id, emails } = profile;
+        // throw profile;
+        logger.log({ profile });
+
         newUser.googleID = id;
         newUser.email = emails ? emails[0].value : 'unknown@email.com';
         newUser.password = 'unset';
-        newUser.save().then((newlyCreatedUser) => {
-          logger.log({ newlyCreatedUser });
-          done('', newlyCreatedUser);
-        });
+        newUser.save()
+          .then((newlyCreatedUser) => {
+            logger.log({ newlyCreatedUser });
+            done('', newlyCreatedUser);
+          });
       }
     },
   ));
