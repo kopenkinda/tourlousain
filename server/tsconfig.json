@@ -16,7 +16,12 @@
     ],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "paths": {
+      "^src/*": [
+        "./src/$1"
+      ]
+    }
   },
   "include": [
     "src"

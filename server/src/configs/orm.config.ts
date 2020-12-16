@@ -1,9 +1,13 @@
 import { ConnectionOptions, DatabaseType } from 'typeorm';
 import path from 'path';
+import { logger } from 'src/utils/logger';
 
 export function getOrmConfig() {
-  const entityPath = path.join(__dirname, '..', 'models', '**/*.entity.js');
-
+  const entityPaths = [
+    path.join(__dirname, '..', 'models', '**/*.entity.js'),
+    path.join(__dirname, '..', 'models', '**/*.entity.ts'),
+  ];
+  logger.info('Entities (aka. Models) are stored in', entityPaths);
   const {
     DB_TYPE,
     DB_PORT,
@@ -21,9 +25,7 @@ export function getOrmConfig() {
     username: DB_USER || 'root',
     password: DB_PASSWORD || '',
     database: DB_NAME || 'tourlousain',
-    entities: [
-      entityPath,
-    ],
+    entities: entityPaths,
     synchronize: true,
     logging: false,
   };

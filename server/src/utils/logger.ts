@@ -24,17 +24,39 @@ const colors = {
   BgWhite: '\x1b[47m',
 };
 
-const logOfType = (tag: string, color: string, emoji: string) => (...data: any) => console.log(`${new Date().toLocaleTimeString()} ${color} ${emoji || '  '}  [${tag}]${colors.Reset}`, ...data);
+function getFileName() {
+  const stackOffset = 2;
+  try {
+    throw new Error('Custom Error');
+  } catch (e) {
+    Error.prepareStackTrace = (...args) => args[1];
+    const file = e.stack[stackOffset].getFileName();
+    const row = e.stack[stackOffset].getLineNumber();
+    const column = e.stack[stackOffset].getColumnNumber();
+    return { file, row, column };
+  }
+}
 
-const info = logOfType('INFO', colors.FgCyan, 'ℹ');
-const warn = logOfType('WARN', colors.FgYellow, '⚠');
-const log = logOfType('LOG', colors.FgGreen, '💬');
-const danger = logOfType('DANGER', colors.FgRed, '🔴');
+const logOfType = (tag: string, color: string) => (...data: any) => {
+  const { file, row, column } = getFileName();
+  const filePath = file.split('/').slice(-2).join('/');
+  // eslint-disable-next-line no-console
+  console.log(
+    `╭${color}[${tag}]${colors.Reset} (${filePath}@${row}:${column}) ${new Date().toLocaleTimeString()}
+╰#`, ...data,
+  );
+};
+
+const alert = logOfType('!', colors.FgBlack + colors.Blink + colors.BgYellow);
+const info = logOfType('info', colors.FgBlack + colors.BgCyan);
+const warn = logOfType('warn', colors.FgBlack + colors.BgYellow);
+const log = logOfType('log', colors.FgWhite + colors.BgGreen);
+const error = logOfType('danger', colors.FgWhite + colors.BgRed);
 
 export const logger = {
+  alert,
   info,
   warn,
   log,
-  danger,
-  error: danger,
+  error,
 };
