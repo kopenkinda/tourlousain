@@ -44,7 +44,7 @@ export async function refresh(req: Request, res: Response) {
       token: jwt.sign({
         id: user.id,
         role: user.role,
-      }, jwtConfig.accessSecret, { expiresIn: 15 }),
+      }, jwtConfig.accessSecret, { expiresIn: '1h' }),
     });
   });
 }
