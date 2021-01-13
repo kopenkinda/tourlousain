@@ -4,7 +4,7 @@ import {
 
 export enum UserRole {
   DEFAULT,
-  ADMIN
+  ADMIN,
 }
 
 @Entity()
