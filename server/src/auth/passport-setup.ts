@@ -33,8 +33,8 @@ export function passportInit() {
   ));
 
   // ? Serialize user
-  passport.serializeUser((user: User, done) => {
-    done(null, user.id);
+  passport.serializeUser((user, done) => {
+    done(null, (user as User).id);
   });
   // ? De-serialize user
   passport.deserializeUser((id: string, done) => {
