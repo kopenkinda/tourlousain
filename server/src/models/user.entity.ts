@@ -2,6 +2,11 @@ import {
   BaseEntity, Column, Entity, PrimaryGeneratedColumn,
 } from 'typeorm';
 
+export enum UserRole {
+  DEFAULT,
+  ADMIN
+}
+
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -15,4 +20,7 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @Column({ default: UserRole.DEFAULT })
+  role: UserRole;
 }

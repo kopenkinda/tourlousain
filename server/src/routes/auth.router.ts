@@ -1,15 +1,27 @@
 import express from 'express';
 import passport from 'passport';
-import { googleRedirect, index, logout } from '../controllers/auth.controller';
+import * as controller from '../controllers/auth.controller';
 
 export const authRouter = express.Router();
 
-authRouter.get('/', index);
+authRouter.get('/logout', controller.revoke);
 
-authRouter.get('/logout', logout);
+authRouter.get(
+  '/google',
+  controller.saveReferer,
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    session: false,
+  }),
+);
 
-authRouter.get('/google', passport.authenticate('google', {
-  scope: ['profile', 'email'],
-}));
+authRouter.get(
+  '/google/redirect',
+  passport.authenticate('google', { session: false }),
+  controller.callback,
+);
 
-authRouter.get('/google/redirect', passport.authenticate('google'), googleRedirect);
+authRouter.post(
+  '/refresh',
+  controller.refresh,
+);

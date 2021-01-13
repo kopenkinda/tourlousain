@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import session from 'express-session';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 import { passportInit } from './auth/passport-setup';
 import { errorHandler, notFoundHandler } from './middlewares/error.middleware';
@@ -12,14 +12,11 @@ export function serverInit() {
   app.use(express.static(path.join(__dirname, 'public')));
 
   // ? app use
-  app.use(
-    session({ secret: process.env.SESSION_SECRET!, resave: false, saveUninitialized: false }),
-  );
+  app.use(cookieParser());
 
   // ? Setup passport
   app.use(passport.initialize());
   passportInit();
-  app.use(passport.session());
 
   // ? Setup routers
   app.use('/api', apiRouter);

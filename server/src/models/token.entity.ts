@@ -3,10 +3,14 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Example extends BaseEntity {
+export class RefreshToken extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  value!: string;
+
+  public revoke() {
+    return this.remove();
+  }
 }
