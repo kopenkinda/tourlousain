@@ -3,8 +3,9 @@ import {
 } from 'typeorm';
 
 export enum UserRole {
-  DEFAULT,
   ADMIN,
+  USER,
+  PROFESSIONNAL
 }
 
 @Entity()
@@ -21,6 +22,15 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
-  @Column({ default: UserRole.DEFAULT })
+  @Column({ default: UserRole.USER })
   role: UserRole;
+
+  @Column()
+  sharedImages: any[];
+
+  @Column()
+  description: string;
+
+  @Column({ default: Date.now() })
+  signUpDate: Date;
 }
