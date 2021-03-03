@@ -1,11 +1,11 @@
 import {
-  BaseEntity, Column, Entity, PrimaryGeneratedColumn,
+  BaseEntity, Column, Entity, ObjectID, ObjectIdColumn,
 } from 'typeorm';
 
 @Entity()
 export class RefreshToken extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  id: ObjectID;
 
   @Column()
   value!: string;

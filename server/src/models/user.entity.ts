@@ -1,17 +1,17 @@
 import {
-  BaseEntity, Column, Entity, PrimaryGeneratedColumn,
+  BaseEntity, Column, Entity, ObjectID, ObjectIdColumn,
 } from 'typeorm';
 
 export enum UserRole {
   ADMIN,
   USER,
-  PROFESSIONNAL
+  PROFESSIONNAL,
 }
 
 @Entity()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  id: ObjectID;
 
   @Column()
   googleID: string;

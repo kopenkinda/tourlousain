@@ -6,6 +6,7 @@ import { passportInit } from './auth/passport-setup';
 import { errorHandler, notFoundHandler } from './middlewares/error.middleware';
 import { apiRouter } from './routes/api.router';
 import { authRouter } from './routes/auth.router';
+import ControllerReader from './controllers/controller.reader';
 
 export function serverInit() {
   const app = express();
@@ -17,6 +18,8 @@ export function serverInit() {
   // ? Setup passport
   app.use(passport.initialize());
   passportInit();
+
+  ControllerReader(app);
 
   // ? Setup routers
   app.use('/api', apiRouter);

@@ -21,12 +21,12 @@ export function getOrmConfig() {
     type: DB_TYPE as DatabaseType || 'mysql',
     host: DB_HOST || 'localhost',
     port: DB_PORT ? +DB_PORT : 3306,
-    username: DB_USER || 'root',
-    password: DB_PASSWORD || '',
+    // username: DB_USER || 'root',
+    // password: DB_PASSWORD || '',
     database: DB_NAME || 'tourlousain',
-    entities: entityPaths,
-    synchronize: true,
-    logging: false,
+    // entities: entityPaths,
+    // synchronize: true,
+    // logging: false,
   };
   // @ts-check
   return ormConfig;

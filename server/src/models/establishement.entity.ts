@@ -1,32 +1,32 @@
 import {
-    BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn,
+  BaseEntity, Column, Entity, JoinTable, ManyToMany, ObjectID, ObjectIdColumn,
 } from 'typeorm';
 
 import { User } from './user.entity';
 
 export enum establishementType {
-    Restaurant,
-    Bar,
-    Culture,
-    NightClub,
-    Sport,
-    Découverte
+  Restaurant,
+  Bar,
+  Culture,
+  NightClub,
+  Sport,
+  Decouverte,
 }
 
 @Entity()
 export class Establishement extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @ObjectIdColumn()
+  id: ObjectID;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    address: string;
+  @Column()
+  address: string;
 
-    @Column()
-    type: establishementType;
+  @Column()
+  type: establishementType;
 
-    @ManyToMany(type => User) @JoinTable()
-    owner: User[];
+  @ManyToMany((type) => User) @JoinTable()
+  owner: User[];
 }
